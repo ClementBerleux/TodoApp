@@ -1,17 +1,13 @@
 import { Component } from '@angular/core';
 import { Event, Router, RouterOutlet, NavigationEnd } from '@angular/router';
-
 import { IStaticMethods } from 'preline/preline';
 import { TaskComponent } from "./components/task/task.component";
+import { tasks, Task } from './class/task.model';
+
 declare global {
   interface Window {
     HSStaticMethods: IStaticMethods;
   }
-}
-
-interface Task {
-  name: string
-  completed: boolean
 }
 
 @Component({
@@ -23,16 +19,13 @@ interface Task {
 })
 export class AppComponent {
 
-  public tasks: Task[] = [
-    { name: "Définir un projet", completed: true },
-    { name: "Construire une maquette", completed: false },
-    { name: "Coder l'application", completed: false }
-  ]
+  public tasks: Task[] = tasks
 
   public nombreTasksCompleted: number = 1;
 
-  public calculTasksCompleted(nombre: number) {
-    this.nombreTasksCompleted += nombre
+  public calculTasksCompleted(completed: boolean): void {
+    if (completed) this.nombreTasksCompleted++
+    else this.nombreTasksCompleted--
   }
 
   constructor(private router: Router) { }

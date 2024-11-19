@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Task } from '../../class/task.model';
 
 @Component({
   selector: 'compo-task',
@@ -9,30 +10,21 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './task.component.css'
 })
 export class TaskComponent {
-  @Input() public numero?: number
-  @Input() public name?: string
-  @Input() public completed: boolean = false
-  @Output() complete = new EventEmitter<number>();
+  @Input() public task: Task = new Task()
+  @Output() complete: EventEmitter<boolean> = new EventEmitter<boolean>()
 
   public getComplete(): string {
-    if (this.completed) return "terminée"
+    if (this.task.completed) return "terminée"
     else return "en cours"
   }
 
   public toggleCompleted(): void {
-    this.completed = !this.completed
-    if (this.completed) this.complete.emit(1)
-    else this.complete.emit(-1)
+    this.task.completed = !this.task.completed
+    this.complete.emit(this.task.completed)
   }
 
   public getButtonText(): string {
-    if (this.completed) return "Annuler"
+    if (this.task.completed) return "Annuler"
     else return "Terminer"
-  }
-
-  public send() {
-
-    if (this.completed) this.complete.emit(1)
-    else this.complete.emit(-1)
   }
 }
