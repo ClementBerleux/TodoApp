@@ -5,7 +5,11 @@ module.exports = {
     './node_modules/preline/preline.js'
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'sans': ['"Comic-sans-MS"'],
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

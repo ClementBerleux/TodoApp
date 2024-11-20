@@ -4,10 +4,19 @@
   <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-4">
 
     <!-- Title -->
+
     <div class="max-w-3xl text-center mx-auto">
-      <h1 class="block font-medium text-gray-800 dark:text-gray-300 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
-        Liste des tâches
-      </h1>
+      <h2 class="block font-medium text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+        @if (nombreTasksCompleted > 0) {
+        @if (nombreTasksCompleted > 1) {
+        {{nombreTasksCompleted}} tâches terminées sur {{tasks.length}} !
+        }@else {
+        Une tâche terminée sur {{tasks.length}} !
+        }
+        }@else {
+        Il serait temps de s'y mettre...
+        }
+      </h2>
     </div>
     <!-- End Title -->
 
@@ -18,20 +27,13 @@
           <ul class="max-w-md">
             @for (task of tasks; track $index) {
             <compo-task [task]="task" (complete)="calculTasksCompleted($event)"></compo-task>
+            }@empty {
+            <p class="text-2xl">Il n'y a aucune tâche...</p>
             }
           </ul>
         </div>
       </div>
     </div>
-
-    @if (nombreTasksCompleted > 0) {
-    <div class="max-w-3xl text-center mx-auto">
-      <h2 class="block font-medium text-gray-800 dark:text-gray-300 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-        {{nombreTasksCompleted}} tâche{{nombreTasksCompleted > 1 ? 's' : ''}} terminée{{nombreTasksCompleted > 1 ? 's'
-        : ''}} !
-      </h2>
-    </div>
-    }
   </div>
 </div>
 <!-- End Hero -->

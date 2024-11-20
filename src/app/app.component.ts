@@ -21,7 +21,7 @@ export class AppComponent {
 
   public tasks: Task[] = tasks
 
-  public nombreTasksCompleted: number = 1;
+  public nombreTasksCompleted: number = tasks.filter((tache) => tache.completed).length;
 
   public calculTasksCompleted(completed: boolean): void {
     if (completed) this.nombreTasksCompleted++

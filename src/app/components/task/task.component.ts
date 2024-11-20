@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Task } from '../../class/task.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'compo-task',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, DatePipe],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css'
 })
