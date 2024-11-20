@@ -9,9 +9,9 @@
       <h2 class="block font-medium text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
         @if (nombreTasksCompleted > 0) {
         @if (nombreTasksCompleted > 1) {
-        {{nombreTasksCompleted}} tâches terminées sur {{tasks.length}} !
+        {{nombreTasksCompleted}} tâches terminées sur {{todolistService.tasks.length}} !
         }@else {
-        Une tâche terminée sur {{tasks.length}} !
+        Une tâche terminée sur {{todolistService.tasks.length}} !
         }
         }@else {
         Il serait temps de s'y mettre...
@@ -25,7 +25,7 @@
         class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
         <div class="p-4 md:p-5">
           <ul class="max-w-md">
-            @for (task of tasks; track $index) {
+            @for (task of todolistService.tasks; track $index) {
             <compo-task [task]="task" (complete)="calculTasksCompleted($event)"></compo-task>
             }@empty {
             <p class="text-2xl">Il n'y a aucune tâche...</p>

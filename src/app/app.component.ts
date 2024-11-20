@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Event, Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { IStaticMethods } from 'preline/preline';
 import { TaskComponent } from "./components/task/task.component";
-import { tasks, Task } from './class/task.model';
+import { TodolistService } from './services/todolist.service';
 
 declare global {
   interface Window {
@@ -19,16 +19,18 @@ declare global {
 })
 export class AppComponent {
 
-  public tasks: Task[] = tasks
+  //public tasks: Task[] = tasks
 
-  public nombreTasksCompleted: number = tasks.filter((tache) => tache.completed).length;
+  public nombreTasksCompleted: number
 
   public calculTasksCompleted(completed: boolean): void {
     if (completed) this.nombreTasksCompleted++
     else this.nombreTasksCompleted--
   }
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public todolistService: TodolistService) {
+    this.nombreTasksCompleted = this.todolistService.tasks.filter((tache) => tache.completed).length
+  }
 
   ngOnInit() {
     this.router.events.subscribe((event: Event) => {
