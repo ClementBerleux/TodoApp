@@ -27,9 +27,6 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ],
             "scripts": [
               "node_modules/preline/dist/preline.js"
             ]
@@ -48,7 +45,10 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "styles": [
+                "src/styles.css"
+              ]
             },
             "development": {
               "optimization": false,
@@ -58,11 +58,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.development.ts"
-                },
-                {
-                  "replace": "src/styles.css",
-                  "with": "src/styles.development.css"
                 }
+              ],
+              "styles": [
+                "src/styles.development.css"
               ]
             }
           },
