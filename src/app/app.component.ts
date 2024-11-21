@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Event, Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { IStaticMethods } from 'preline/preline';
-import { TaskComponent } from "./components/task/task.component";
-import { TodolistService } from './services/todolist.service';
+import { NavComponent } from './components/nav/nav.component';
+import { TodolistComponent } from "./components/todolist/todolist.component";
 
 declare global {
   interface Window {
@@ -13,23 +13,12 @@ declare global {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TaskComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [RouterOutlet, NavComponent, TodolistComponent],
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
 
-  //public tasks: Task[] = tasks
-
-  public nombreTasksCompleted: number
-
-  public calculTasksCompleted(completed: boolean): void {
-    if (completed) this.nombreTasksCompleted++
-    else this.nombreTasksCompleted--
-  }
-
-  constructor(private router: Router, public todolistService: TodolistService) {
-    this.nombreTasksCompleted = this.todolistService.tasks.filter((tache) => tache.completed).length
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
