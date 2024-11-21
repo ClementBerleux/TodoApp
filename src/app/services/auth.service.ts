@@ -12,11 +12,11 @@ export class AuthService {
 
   public login(): void {
     setTimeout(() => this.isAuth = true, 1000)
-    this.router.navigate(['todo/1'])
+    // this.router.navigate([''])
   }
 
   public logout(): void {
     setTimeout(() => this.isAuth = false, 1000)
-    this.router.navigate([''])
+    // this.router.navigate([''])
   }
 }
