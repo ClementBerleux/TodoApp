@@ -8,15 +8,15 @@ export class AuthService {
 
   public isAuth: boolean = false
 
+  constructor(public router: Router) { }
+
   public login(): void {
     setTimeout(() => this.isAuth = true, 1000)
-    this.router.navigate(['todo'])
+    this.router.navigate(['todo/1'])
   }
 
   public logout(): void {
     setTimeout(() => this.isAuth = false, 1000)
     this.router.navigate([''])
   }
-
-  constructor(public router: Router) { }
 }

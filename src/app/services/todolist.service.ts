@@ -37,4 +37,8 @@ export class TodolistService {
     })
     this.nombreTasksCompleted = this.tasks.filter((tache) => tache.completed).length
   }
+
+  public getTaskById(id: number): Task | undefined {
+    return this.tasks.find((tache) => tache.id == id)
+  }
 }
