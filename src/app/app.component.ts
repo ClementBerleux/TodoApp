@@ -3,6 +3,8 @@ import { Event, Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { IStaticMethods } from 'preline/preline';
 import { NavComponent } from './components/nav/nav.component';
 import { TodolistComponent } from "./components/todolist/todolist.component";
+import { LoginComponent } from "./components/login/login.component";
+import { LogoutComponent } from "./components/logout/logout.component";
 
 declare global {
   interface Window {
@@ -13,7 +15,7 @@ declare global {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavComponent, TodolistComponent],
+  imports: [RouterOutlet, NavComponent, TodolistComponent, LoginComponent, LogoutComponent],
   templateUrl: './app.component.html'
 })
 export class AppComponent {

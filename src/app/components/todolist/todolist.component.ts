@@ -10,15 +10,7 @@ import { TaskComponent } from "../task/task.component";
 })
 export class TodolistComponent {
 
-  public nombreTasksCompleted: number
-
-  public calculTasksCompleted(completed: boolean): void {
-    if (completed) this.nombreTasksCompleted++
-    else this.nombreTasksCompleted--
-  }
-
   constructor(public todolistService: TodolistService) {
-    this.nombreTasksCompleted = this.todolistService.tasks.filter((tache) => tache.completed).length
   }
 
 }

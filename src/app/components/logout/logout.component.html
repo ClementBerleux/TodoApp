@@ -1,1 +1,6 @@
-<p>logout works!</p>
+@if(authService.isAuth){
+<button type="button" (click)="authService.logout()"
+    class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600">Déconnexion</button>
+} @else {
+<p class="text-xl text-red-600 dark:text-red-500">Utilisateur non connecté</p>
+}

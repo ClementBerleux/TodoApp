@@ -13,6 +13,7 @@ const initialList: Task[] = [
 export class TodolistService {
 
   public tasks: Task[] = []
+  public nombreTasksCompleted: number = 0
 
   constructor() {
     this.updateTasks(initialList)
@@ -20,7 +21,11 @@ export class TodolistService {
 
   public toggleCompleted(id: number): void {
     this.tasks.map((tache) => {
-      if (tache.id == id) tache.completed = !tache.completed
+      if (tache.id == id) {
+        tache.completed = !tache.completed
+        if (tache.completed) this.nombreTasksCompleted++
+        else this.nombreTasksCompleted--
+      }
     })
   }
 
@@ -30,5 +35,6 @@ export class TodolistService {
         resolve(Object.assign([], tasks))
       }, 3000)
     })
+    this.nombreTasksCompleted = this.tasks.filter((tache) => tache.completed).length
   }
 }

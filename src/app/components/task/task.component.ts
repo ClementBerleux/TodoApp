@@ -12,7 +12,7 @@ import { TodolistService } from '../../services/todolist.service';
 })
 export class TaskComponent {
   @Input() public task: Task = new Task()
-  @Output() complete: EventEmitter<boolean> = new EventEmitter<boolean>()
+  // @Output() complete: EventEmitter<boolean> = new EventEmitter<boolean>()
 
   constructor(private todolistService: TodolistService) { }
 
@@ -24,7 +24,7 @@ export class TaskComponent {
   public toggleCompleted(): void {
     this.todolistService.toggleCompleted(this.task.id)
     // this.task.completed = !this.task.completed
-    this.complete.emit(this.task.completed)
+    // this.complete.emit(this.task.completed)
   }
 
   public getButtonText(): string {
