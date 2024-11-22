@@ -9,9 +9,9 @@
         @if (todolistService.nombreTasksCompleted > 0) {
           @if (todolistService.nombreTasksCompleted > 1) {
             {{ todolistService.nombreTasksCompleted }} tâches terminées sur
-            {{ todolistService.tasks.length }} !
+            {{ tasks.length }} !
           } @else {
-            Une tâche terminée sur {{ todolistService.tasks.length }} !
+            Une tâche terminée sur {{ tasks.length }} !
           }
         } @else {
           Il serait temps de s'y mettre...
@@ -25,7 +25,7 @@
       >
         <div class="p-4 md:p-5">
           <ul class="max-w-md">
-            @for (task of todolistService.tasks; track $index) {
+            @for (task of tasks; track $index) {
               <compo-task [task]="task"></compo-task>
             } @empty {
               <p class="text-2xl">Il n'y a aucune tâche...</p>

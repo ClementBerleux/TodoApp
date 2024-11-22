@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../class/task.model';
+import { Observable, ReplaySubject } from 'rxjs';
 
 const initialList: Task[] = [
   {
@@ -31,7 +32,9 @@ const initialList: Task[] = [
   providedIn: 'root',
 })
 export class TodolistService {
-  public tasks: Task[] = [];
+  private tasks: Task[] = [];
+  private _tasks: ReplaySubject<Task[]> = new ReplaySubject<Task[]>();
+  public readonly tasks$: Observable<Task[]> = this._tasks;
   public nombreTasksCompleted: number = 0;
 
   constructor() {
@@ -55,6 +58,7 @@ export class TodolistService {
     this.nombreTasksCompleted = this.tasks.filter(
       (tache) => tache.completed,
     ).length;
+    this.emit();
   }
 
   public getTaskById(id: number): Task | undefined {
@@ -71,5 +75,13 @@ export class TodolistService {
     let indexTask = this.tasks.findIndex((tache) => tache.id == id);
     if (indexTask < this.tasks.length - 1) return this.tasks[indexTask + 1].id;
     else return -1;
+  }
+
+  public getTasks(): Observable<Task[]> {
+    return this.tasks$;
+  }
+
+  public emit(): void {
+    this._tasks.next(Object.assign([], this.tasks));
   }
 }

@@ -1,52 +1,92 @@
-@if(task) {
-<div class="flex flex-col m-10">
+@if (task) {
+  <div class="flex flex-col m-10">
     <label>
-        <p class="my-2 text-2xl font-bold">
-            <input type="checkbox" [checked]="task.completed" (click)="toggleCompleted()"
-                class="mx-2 shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-neutral-200 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
-            <span [class]="task.completed ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'">
-                {{task.title}} : {{getComplete()}}</span>
-        </p>
+      <p class="my-2 text-2xl font-bold">
+        <input
+          type="checkbox"
+          [checked]="task.completed"
+          (click)="toggleCompleted()"
+          class="mx-2 shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-neutral-200 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+        />
+        <span
+          [class]="
+            task.completed
+              ? 'text-green-600 dark:text-green-500'
+              : 'text-red-600 dark:text-red-500'
+          "
+        >
+          {{ task.title }} : {{ getComplete() }}</span
+        >
+      </p>
     </label>
-    <textarea [(ngModel)]="task.description"
-        class="py-3 px-4 block w-full resize-none border-gray-200 rounded-lg text-xl font-normal caret-blue-400 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:focus:ring-neutral-600 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
-        rows="3"></textarea>
+    <textarea
+      [(ngModel)]="task.description"
+      class="py-3 px-4 block w-full resize-none border-gray-200 rounded-lg text-xl font-normal caret-blue-400 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:focus:ring-neutral-600 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+      rows="3"
+    ></textarea>
     <div class="flex gap-2">
-        <p class="flex-grow text-lg px-2">{{task.date | date:'fullDate':undefined:'fr-FR'}}</p>
-        <button type="button" (click)="toggleCompleted()"
-            class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600">
-            {{getButtonText()}}
-        </button>
+      <p class="flex-grow text-lg px-2">
+        {{ task.date | date: "fullDate" : undefined : "fr-FR" }}
+      </p>
+      <button
+        type="button"
+        (click)="toggleCompleted()"
+        class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600"
+      >
+        {{ getButtonText() }}
+      </button>
     </div>
     <div class="flex gap-2 justify-center">
-        @if (todolistService.getPreviousTaskId(task.id) != -1) {
-        <button type="button" [routerLink]="'/todos/' + todolistService.getPreviousTaskId(task.id)"
-            class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600">
-            Précédent
+      @if (todolistService.getPreviousTaskId(task.id) != -1) {
+        <button
+          type="button"
+          [routerLink]="'/todos/' + todolistService.getPreviousTaskId(task.id)"
+          class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600"
+        >
+          Précédent
         </button>
-        }@else {
-        <button type="button" disabled
-            class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600">
-            Précédent
+      } @else {
+        <button
+          type="button"
+          disabled
+          class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600"
+        >
+          Précédent
         </button>
-        }
-        <button type="button" (click)="location.back()"
-            class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600">
-            Retour
+      }
+      <button
+        type="button"
+        (click)="location.back()"
+        class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600"
+      >
+        Retour
+      </button>
+      <button
+        type="button"
+        routerLink="/todos/"
+        class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600"
+      >
+        Home
+      </button>
+      @if (todolistService.getNextTaskId(task.id) != -1) {
+        <button
+          type="button"
+          [routerLink]="'/todos/' + todolistService.getNextTaskId(task.id)"
+          class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600"
+        >
+          Suivant
         </button>
-        @if (todolistService.getNextTaskId(task.id) != -1) {
-        <button type="button" [routerLink]="'/todos/' + todolistService.getNextTaskId(task.id)"
-            class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600">
-            Suivant
+      } @else {
+        <button
+          type="button"
+          disabled
+          class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600"
+        >
+          Suivant
         </button>
-        }@else {
-        <button type="button" disabled
-            class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600">
-            Suivant
-        </button>
-        }
+      }
     </div>
-</div>
+  </div>
 } @else {
-<h1>Aucune tâche trouvée</h1>
+  <h1>Aucune tâche trouvée</h1>
 }
