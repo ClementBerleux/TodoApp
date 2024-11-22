@@ -3,12 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { Task } from '../../class/task.model';
 import { DatePipe, Location } from '@angular/common';
 import { TodolistService } from '../../services/todolist.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'compo-taskdetails',
   standalone: true,
-  imports: [FormsModule, DatePipe],
+  imports: [FormsModule, DatePipe, RouterLink],
   templateUrl: './taskdetails.component.html',
   styles: ``
 })
@@ -20,8 +20,9 @@ export class TaskdetailsComponent {
   }
 
   ngOnInit() {
-    const taskId = this.route.snapshot.paramMap.get('id')
-    if (taskId) this.task = this.todolistService.getTaskById(parseInt(taskId))
+    // const taskId = this.route.snapshot.paramMap.get('id') // route statique
+    // if (taskId) this.task = this.todolistService.getTaskById(parseInt(taskId))
+    this.route.paramMap.subscribe((params) => this.task = this.todolistService.getTaskById(Number(params.get('id'))))
   }
 
   public getComplete(): string {

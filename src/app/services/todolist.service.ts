@@ -41,4 +41,18 @@ export class TodolistService {
   public getTaskById(id: number): Task | undefined {
     return this.tasks.find((tache) => tache.id == id)
   }
+
+  public getPreviousTaskId(id: number): number {
+
+    let indexTask = this.tasks.findIndex((tache) => tache.id == id)
+    if (indexTask > 0) return this.tasks[indexTask - 1].id
+    else return -1
+  }
+
+  public getNextTaskId(id: number): number {
+
+    let indexTask = this.tasks.findIndex((tache) => tache.id == id)
+    if (indexTask < this.tasks.length - 1) return this.tasks[indexTask + 1].id
+    else return -1
+  }
 }
