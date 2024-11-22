@@ -21,9 +21,7 @@
             "baseHref": "/TodoApp/",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -31,9 +29,7 @@
                 "input": "public"
               }
             ],
-            "scripts": [
-              "node_modules/preline/dist/preline.js"
-            ]
+            "scripts": ["node_modules/preline/dist/preline.js"]
           },
           "configurations": {
             "production": {
@@ -50,9 +46,7 @@
                 }
               ],
               "outputHashing": "all",
-              "styles": [
-                "src/styles.css"
-              ]
+              "styles": ["src/styles.css"]
             },
             "development": {
               "optimization": false,
@@ -64,9 +58,7 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ],
-              "styles": [
-                "src/styles.development.css"
-              ]
+              "styles": ["src/styles.development.css"]
             }
           },
           "defaultConfiguration": "production"
@@ -89,10 +81,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               {
@@ -100,12 +89,8 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": [
-              "node_modules/preline/dist/preline.js"
-            ]
+            "styles": ["src/styles.css"],
+            "scripts": ["node_modules/preline/dist/preline.js"]
           }
         }
       }

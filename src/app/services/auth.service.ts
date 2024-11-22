@@ -2,21 +2,26 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  public isAuth: boolean = false;
 
-  public isAuth: boolean = false
-
-  constructor(public router: Router) { }
+  constructor(public router: Router) {}
 
   public login(): void {
-    setTimeout(() => this.isAuth = true, 1000)
+    setTimeout(() => {
+      this.isAuth = true;
+      this.router.navigate(['/todos']);
+    }, 500);
     // this.router.navigate([''])
   }
 
   public logout(): void {
-    setTimeout(() => this.isAuth = false, 1000)
+    setTimeout(() => {
+      this.isAuth = false;
+      this.router.navigate(['']);
+    }, 500);
     // this.router.navigate([''])
   }
 }
