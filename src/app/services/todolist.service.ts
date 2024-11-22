@@ -36,6 +36,7 @@ export class TodolistService {
   private _tasks: ReplaySubject<Task[]> = new ReplaySubject<Task[]>();
   public readonly tasks$: Observable<Task[]> = this._tasks;
   public nombreTasksCompleted: number = 0;
+  private lastId = 3;
 
   constructor() {
     this.updateTasks(initialList);
@@ -83,5 +84,15 @@ export class TodolistService {
 
   public emit(): void {
     this._tasks.next(Object.assign([], this.tasks));
+  }
+
+  public createTask(title: string, description: string): void {
+    let task = new Task();
+    this.lastId++;
+    task.id = this.lastId;
+    task.title = title;
+    task.description = description;
+    this.tasks.push(task);
+    this.emit();
   }
 }

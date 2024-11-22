@@ -3,11 +3,12 @@ import { TodolistService } from '../../services/todolist.service';
 import { TaskComponent } from '../task/task.component';
 import { Task } from '../../class/task.model';
 import { Subscription } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'compo-todolist',
   standalone: true,
-  imports: [TaskComponent],
+  imports: [TaskComponent, RouterLink],
   templateUrl: './todolist.component.html',
 })
 export class TodolistComponent {

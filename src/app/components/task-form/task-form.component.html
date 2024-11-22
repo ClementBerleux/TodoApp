@@ -1,0 +1,57 @@
+<div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-4">
+  <div class="max-w-3xl text-center mx-auto">
+    <h2 class="block font-medium text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+      Création d'une nouvelle tâche
+    </h2>
+  </div>
+  <form>
+    <div class="flex justify-center items-center m-4 p-4">
+      <div
+        class="flex flex-col bg-neutral-100 border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70"
+      >
+        <div class="p-4 md:p-5">
+          <label>
+            <p class="my-2 text-2xl font-bold">
+              Titre :
+              <input
+                name="title"
+                class="py-3 px-4 block w-full resize-none border-gray-200 rounded-lg text-xl font-normal caret-blue-400 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:focus:ring-neutral-600"
+                type="text"
+                [(ngModel)]="title"
+                required
+              />
+            </p>
+          </label>
+          <label>
+            <p class="my-2 text-2xl font-bold">Description :</p>
+            <textarea
+              name="description"
+              [(ngModel)]="description"
+              required=""
+              class="py-3 px-4 block w-full resize-none border-gray-200 rounded-lg text-xl font-normal caret-blue-400 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:focus:ring-neutral-600 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+              rows="3"
+            ></textarea>
+          </label>
+          <div class="flex gap-2">
+            <div class="flex justify-center items-center m-4 gap-2">
+              <button
+                type="button"
+                (click)="location.back()"
+                class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600"
+              >
+                Retour
+              </button>
+              <button
+                type="button"
+                (click)="onSubmit()"
+                class="justify-self-end my-2 py-2 px-4 inline-flex items-center gap-x-2 text-xl font-bold rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-gray-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600"
+              >
+                Sauvegarder
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
