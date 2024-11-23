@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../class/task.model';
-import { Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 const initialList: Task[] = [
   {
@@ -33,7 +33,7 @@ const initialList: Task[] = [
 })
 export class TodolistService {
   private tasks: Task[] = [];
-  private _tasks: ReplaySubject<Task[]> = new ReplaySubject<Task[]>();
+  private _tasks: BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>(this.tasks);
   public readonly tasks$: Observable<Task[]> = this._tasks;
   public nombreTasksCompleted: number = 0;
   private lastId = 3;

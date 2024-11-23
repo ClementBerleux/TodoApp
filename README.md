@@ -1,27 +1,15 @@
 # Todo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.10.
+Exemple d'application web créée avec [Angular](https://angular.dev/), [Tailwind CSS](https://tailwindcss.com/) et [Preline UI](https://preline.co/index.html).
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## GitHub Actions
+Cette application est déployée sur GitHub Pages grâce à un [fichier de workflows](/blob/main/.github/workflows/node.js.yml).
+L'hébergement sur GitHub Pages nécessite de faire quelques modifications à l'application Angular :
+ - L'adresse de base utilisée par GitHub Pages est de type `<adresse-GitHub>/<nom-du-repo>`. Il faut donc modifier le fichier de configuration d'Angular [`angular.json`](/blob/main/angular.json) afin d'ajouter le paramètre `"baseHref": "/<nom-du-repo>/"` aux options de build.
+ - L'ajout du paramètre `baseHref` va modifier les URL des fichiers générés, et va empêcher le débogueur de VS Code de fonctionner correctement. Il faut ajouter le paramètre suivant au fichier [`launch.json`](/blob/main/.vscode/launch.json)
+    ```json
+    "sourceMapPathOverrides": {
+        "*": "/<nom-du-repo>/*"
+    }
+    ```
+ - Certaines URL de fichiers ne sont pas affectées par le paramètre baseHref, et nécessitent d'être séparés en une version pour le développement local et une autre version pour l'hébergement sur GitHub. C'est le cas des [fichiers de police (font)](/tree/main/public/fonts), appelés dans le fichier [`styles.css`](/blob/main/src/styles.css). J'ai donc créé un autre fichier [`styles.development.css`](/blob/main/src/styles.development.css), et modifié le fichier de configuration d'Angular [`angular.json`](/blob/main/angular.json) afin de charger un fichier lors d'un build en mode 'development' et l'autre fichier en mode 'production'.

@@ -1,5 +1,5 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+# Ce workflow est déclenché suite à un push, une pull_request acceptée, ou manuellement
+# Il contient 2 étapes : un build du projet Angular avec Node.js, puis un déploiement sur GitHub Pages
 
 name: Node.js CI + Github Pages
 
@@ -12,29 +12,34 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Build job
+  # Etape de build du projet Angular avec Node.js
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Build static files
-      uses: actions/checkout@v4
-    - name: Use Node.js 22
-      uses: actions/setup-node@v4
-      with:
-        node-version: '22.x'
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - name: Upload static files as artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: dist/todo/browser/
-        name: github-pages
+      # Se place dans le repo pour accéder aux fichiers source
+      - name: Access repo
+        uses: actions/checkout@v4
+      # Installe Node.js dans le conteneur
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+      # Installe les dépendances
+      - run: npm ci
+      # Build le projet
+      - run: npm run build --if-present
+      # Stocke les fichiers générés dans le répertoire "dist/todo/browser/" pour pouvoir les utiliser à l'étape suivante (déploiement)
+      - name: Upload static files as artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/todo/browser/
+          name: github-pages
 
-  # Deploy job
+  # Etape de déploiement sur GitHub Pages
   deploy:
-    # Add a dependency to the build job
+    # Il faut exécuter le build avant cette étape
     needs: build
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
@@ -50,6 +55,7 @@ jobs:
     # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
+      # Upload sur GitHub Pages les fichiers générés durant l'étape de build
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
