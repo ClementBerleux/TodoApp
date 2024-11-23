@@ -30,6 +30,8 @@ jobs:
       - run: npm ci
       # Build le projet
       - run: npm run build --if-present
+      # Recopie la page index.html en 404.html pour faire fonctionner le routeur d'Angular sur différentes URL
+      - run: cp dist/todo/browser/index.html dist/todo/browser/404.html
       # Stocke les fichiers générés dans le répertoire "dist/todo/browser/" pour pouvoir les utiliser à l'étape suivante (déploiement)
       - name: Upload static files as artifact
         uses: actions/upload-pages-artifact@v3
